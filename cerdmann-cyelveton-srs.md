@@ -2,6 +2,9 @@
 
 ### Casey Erdmann and Cory Yelverton
 
+## Description:
+An image and text sharing application. Allows users to anonmylously upload images or text and share or embed the content across other services.
+
 ## Requirements:
 
 1. Needs to allow uploading of images: png, jpg, and gif no larger than 15mb
