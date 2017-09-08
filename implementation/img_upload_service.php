@@ -1,6 +1,6 @@
 <?php
 
-require_once('services_handler.php');
+require_once 'services_handler.php';
 
 //Create Services object to update Database
 $services = new SERVICES();
@@ -43,7 +43,7 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
         $services->uploadImage($file_rename);
-        echo "Your image has been uploaded!";
+        echo "Success!";
     } else {
         echo "An issue or error occurred, your file was not uploaded.";
     }
