@@ -38,5 +38,34 @@ public function uploadImage($img_name){
 
 }
 
+
+public function uploadText($text){
+  try{
+      $stmt = $this->runQuery("INSERT INTO Text (`Text`) VALUES(:text)");
+      $stmt->execute(array(":text" => $text));
+      $textID = $this->conn->lastInsertId();
+      return $textID; 
+    }
+    catch(PDOException $ex){
+    echo $ex->getMessage();
+    return "<span style='color: red;'>Error Occurred Uploading Text!</span>";
+
+  }
+}
+
+public function getText($id){
+  try{
+    $stmt = $this->runQuery("SELECT (`Text`) FROM Text WHERE (`TextID`) = (:id)");
+    $stmt->execute(array(":id" => $id));
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['Text']; 
+  }
+  catch(PDOException $ex){
+  echo $ex->getMessage();
+  return "<span style='color: red;'>Error Occurred Could not locate Text!</span>";
+
+}
+}
+
 }
 ?>

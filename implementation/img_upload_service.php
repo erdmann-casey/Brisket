@@ -43,7 +43,8 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
         $services->uploadImage($file_rename);
-        echo "Success!";
+        $generateImageLink = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]/uploads/" . $file_rename;
+        echo "Image URL: <br/>" . '<a href="' . $generateImageLink . '">' . $generateImageLink . '</a>';
     } else {
         echo "An issue or error occurred, your file was not uploaded.";
     }

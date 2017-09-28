@@ -13,7 +13,7 @@ var_dump($services->runQuery("SELECT 1 FROM Images"));
 echo "</span></b>";
 echo "<br/>";
 echo "<b>Testing Image API: ";
-$imageAPI = exec("curl -i -F file=@/Users/Casey/Desktop/bbs\ flyer/bbs-discord.png http://localhost:8888/img_upload_service.php | grep Success");
+$imageAPI = exec("curl -i -F file=@test-image.png http://localhost:8888/img_upload_service.php | grep Success");
 if($imageAPI == "Success!"){
     echo "<span style='color: green;'>" . $imageAPI . "</span>";
 }else{
