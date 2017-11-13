@@ -1,0 +1,12 @@
+p.marginBottom {
+    margin-bottom: 2cm;
+}
+
+p.marginRight{
+    margin-right: : 4cm;
+}
+
+p.titleFont {
+    font-family: "Georgia", serif;
+    font-style: italic;
+}
