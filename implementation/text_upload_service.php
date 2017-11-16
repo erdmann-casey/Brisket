@@ -31,6 +31,10 @@
 
 require_once 'services_handler.php';
 
+/**
+ * Text Upload Service - Allows users to upload text to the database
+ */
+
 //Create Services object to update Database
 $services = new SERVICES();
 

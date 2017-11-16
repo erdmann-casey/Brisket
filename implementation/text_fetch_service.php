@@ -28,6 +28,10 @@
     <hr>
 <?php
 
+/**
+ * Text Fetch Service - Gets text from the database based on an ID
+ */
+
 require_once 'services_handler.php';
 
 //Create Services object to update Database

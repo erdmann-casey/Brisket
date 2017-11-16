@@ -29,60 +29,49 @@
 
 <?php
 
-/**
- * Image Upload Service - Allows users to upload images and adds image information to the database
- */
-
 require_once 'services_handler.php';
+
+/**
+ * Text Upload Service - Allows users to upload text to the database
+ */
 
 //Create Services object to update Database
 $services = new SERVICES();
 
-$target_dir = "uploads/";
-$file_rename = explode(".", basename($_FILES["file"]["name"]));
-$file_rename = round(microtime(true)) . '.' . end($file_rename);
-$target_file = $target_dir . $file_rename;
-$uploadOk = 1;
-$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["file"]["tmp_name"]);
-    if($check !== false) {
-        $uploadOk = 1;
-    } else {
-        $uploadOk = 0;
-    }
+$uploadOk = 0;
+
+$uploadText = '';
+
+
+// Check if text is null
+if(isset($_POST["uploadText"])){
+   $uploadOk = 1;
+   $uploadText = $_POST["uploadText"];
 }
-// Check if file already exists
-if (file_exists($target_file)) {
-    echo "Image was not uploaded, Image already exists.<br/>";
+
+
+// Check text size
+if (strlen($uploadText) >= 500) {
+    echo "Too many characters. Must be less than 500<br/>";
     $uploadOk = 0;
 }
-// Check file size
-if ($_FILES["file"]["size"] > 15000000) {
-    echo "Image size is too large. Must be less than 15mb<br/>";
+
+if(strlen($uploadText) == 0){
+    echo "Posts can not be empty<br/>";
     $uploadOk = 0;
 }
-// Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-    echo "Only JPG, PNG, and GIF are valid image formats for upload!<br/>";
-    $uploadOk = 0;
-}
+
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    echo "An issue or error occurred, your image was not uploaded.<br/>";
-// if everything is ok, try to upload file
+    echo "An issue or error occurred, your text was not posted.<br/>";
+// if everything is ok, try to upload text
 } else {
-    if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-        $services->uploadImage($file_rename);
-        $generateImageLink = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]/uploads/" . $file_rename;
-        echo "<div class='col-md-12'><h3>Image URL: </h3><br/>" . '<img class="img-responsive" src="'. $generateImageLink .'"/><br/><a href="' . $generateImageLink . '">' . $generateImageLink . '</a></div>';
-    } else {
-        echo "An issue or error occurred, your file was not uploaded.";
-    }
+        $textID = $services->uploadText($uploadText);
+        $generateTextLink = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]/text_fetch_service.php?id=" . $textID;
+        echo "<div class='col-md-12'><h3>Text URL: </h3><br/>" . '<div class="col-md-8"><textarea readonly rows="10" class="form-control">'. $uploadText .'</textarea><a href="' . $generateTextLink . '">' . $generateTextLink . '</a></div></div>';
 }
 ?>
+
 
   <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -92,5 +81,4 @@ if ($uploadOk == 0) {
 </body>
 
 </html>
-
 
