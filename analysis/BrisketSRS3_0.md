@@ -2,7 +2,7 @@
 
 1.1 __Functionality__
 
-tbd
+The following requirements are in regards to the functionality of Brisket.
 
 1.1.1 __Upload Image to Brisket__
 
@@ -30,7 +30,7 @@ tbd
 
 1.1.2.3 The system will check the text for any insecure characters.
 
-1.1.2.4 The system will notify the user of an error message if any of the restraint checks are not passed. 
+1.1.2.4 The system will notify the user of an error message if any of the restraint checks are not passed.
 
 1.1.2.5 The system will assign the text an ID number and upload time, and send that information along with the text itself to the database.
 
@@ -42,15 +42,4 @@ tbd
 
 1.2.2 The interface should create an easy to copy link once the uploading processes is completed.
 
-1.2.3 **Additional functionality.
-
-
-
-
-
-
-
-
-
-
-
+1.2.3 The interface should have a search function. 
